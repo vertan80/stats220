@@ -16,5 +16,7 @@ How I felt coming back to uni after **decades**:
 
 ![](https://media1.tenor.com/m/GhzETztJlmUAAAAd/serious-lee-seriously.gif)
 
+How I *mostly* feel about my studies:
 
+![](https://media1.tenor.com/m/xN_7QhSmr84AAAAd/homer-simpsons.gif)
 
