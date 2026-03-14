@@ -9,7 +9,7 @@
 <!--- unordered list --->
 
 - I am undertaking a graduate diploma in stats
-- I am taking STATS 220 because I'd like an overview of data technologies that can help with the analysis of data
+- I am taking STATS 220 because I'd like an overview of data technologies
 - I am interested in learning about how stats can be used at work.
 
 <!--- links to other websites --->
