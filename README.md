@@ -12,7 +12,8 @@
 - I am taking STATS 220 because I'd like an overview of data technologies that can help with the analysis of data
 - I am interested in learning about how stats can be used at work.
 
-<!--- links to other websites
+<!--- links to other websites --->
+
 One of my favourite sites is [Chat GPT](https://chatgpt.com)
 
 <!--- ordered list with links to different animated GIFs --->
