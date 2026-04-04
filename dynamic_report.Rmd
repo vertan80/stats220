@@ -1,0 +1,108 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+library(tidyverse)
+options(scipen=999) # to stop scientific notation
+
+```
+
+```{css}
+.dynamic-comment {
+background-color: lightblue;
+}
+
+```
+## What's going on with this data?
+#logging how the my tiktok feed changes over the course of a week
+#find out the main content thats coming through to my feed
+#find out the average length of videos that I watch
+
+```{r}
+#reading in logged data from survey
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/1ZMfGGBkD1fuwHL7aVNMg1PuUgaE6lp283xcpjwWJe-E/export?format=csv")
+
+#renaming the table and the column headings
+tiktok_feed <- logged_data %>%
+  rename(time_obs = 2, num_videos = 3,
+         content_type = 4, av_vid_length = 5, 
+         engage_level = 6)
+
+#checking table to see if ok
+view(tiktok_feed)
+
+```
+`r nrow(tiktok_feed)` observations were recorded in this survey which logged my tiktok feed for most common content type, average video length and the overall level of engagement I felt from watching the videos.
+
+```{r}
+#Two summary values for Part D
+#Average video length from those watched
+overall_av_length = round(mean(tiktok_feed$av_vid_length, na.rm = TRUE), 1)
+
+#Total number of videos watched across the week that observations were logged
+total_videos = sum(tiktok_feed$num_videos)
+
+#paste0("The total number of videos watched was ", total_videos, " videos and the average length of all videos watched was ",      overall_av_length, " seconds.")
+
+
+```
+
+The total number of videos watched was `r total_videos` videos and the average length of all videos watched was `r overall_av_length` seconds.
+
+## Content type in my Tiktok feed 
+
+```{r fig.width = 8, fig.height = 8}
+ 
+#First bar plot for Part D, most common content type in tiktok feed
+tiktok_feed %>%
+  ggplot(aes(x = content_type)) +
+  geom_bar() +
+  scale_y_continuous(labels = function(x) ceiling(x)) +
+  theme_minimal() +
+  labs(title = "Most common content types in my tiktok feed",
+       x = "Content types in tiktok feed",
+       y = "Count ", 
+       caption = "Source: STATS 220 survey S126")
+
+#summing the totals for each category and sorting my highest to lowest
+sum_cat <- tiktok_feed %>%
+  count(content_type) %>%
+  arrange(desc(n))
+
+# Use this sum_cat[1,1] to get the category with the highest count
+
+```
+
+The content type most frequently in my tiktok feed is '`r sum_cat[1,1]`'.
+
+
+## Level of engagement with videos in tiktok feed
+
+```{r fig.width = 8, fig.height = 8}
+ 
+#Second bar plot for Part D, total level of engagement across all videos
+
+tiktok_feed %>%
+  ggplot(aes(x = engage_level)) +
+  geom_bar() +
+  scale_y_continuous(labels = function(x) ceiling(x)) +
+  theme_minimal() +
+  labs(title = "Level of engagement in tiktok feed",
+       x = "Level of engagement from Tiktok feed",
+       y = "Count",
+       caption = "Source: STATS 220 survey S126")
+
+sum_eng_levels <- tiktok_feed %>%
+  count(engage_level) %>%
+  arrange(desc(n))
+
+```
+
+The engagement levels in my tiktok feed were '`r sum_eng_levels[1,1]`'.
+
+
